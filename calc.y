@@ -81,7 +81,7 @@ struct sym * sym_init (){
 struct sym * sym_new_loop (struct sym * sp, char * n, double val){
 	struct sym * newsp = malloc(sizeof(*newsp));
 	if (sp->next == NULL){
-		sp->next = sym_new(NULL, n, val);
+		sp->next = sym_new(sp->next, n, val);
 		return sp->next;
 	}else{
 	    if(n > sp->name){
