@@ -1525,28 +1525,32 @@ void print (){
 struct sym * sym_init (){
 	struct sym * pi = malloc(sizeof(*pi));
 	struct sym * phi = malloc(sizeof(*phi));
-	pi = sym_new ("PI", 3.14159);
-	phi = sym_new_loop (pi, "PHI", 1.61803);
-	sym_tbl = pi;
-	return pi;
+	struct sym * head = phi;
+	phi = sym_new (NULL, "PHI", 1.61803);
+	pi = sym_new_loop (phi, "PI", 3.14159);
+	return head;
 }
 
 struct sym * sym_new_loop (struct sym * sp, char * n, double val){
-	struct sym * sp2 = malloc(sizeof(*sp2));
+	struct sym * newsp = malloc(sizeof(*newsp));
 	if (sp->next == NULL){
-		sp->next = sym_new(n, val);
+		sp->next = sym_new(NULL, n, val);
 		return sp->next;
 	}else{
-		sp2 = sym_new_loop (sp->next, n, val);
-		return sp2; 
+	    if(n > sp->name){
+		newsp = sym_new_loop (sp->next, n, val);
+		return newsp;
+	    }else{
+		sp->next = sym_new(sp->next, n, val);
+	    } 
 	}
 }
 
-struct sym * sym_new (char * n, double val){
+struct sym * sym_new (struct sym * nxtsp, char * n, double val){
 	struct sym * sp = malloc(sizeof(*sp));
 	sp->name = n;
 	sp->value = val;
-	sp->next = NULL;
+	sp->next = nxtsp;
 	return sp;
 }
 
