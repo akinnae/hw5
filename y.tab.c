@@ -1213,9 +1213,9 @@ yyreduce:
   case 5:
 #line 29 "calc.y" /* yacc.c:1646  */
     { 
-	if((strcmp((yyvsp[-2].symptr)->name, "PI")==0)||(strcmp((yyvsp[-2].symptr)->name,"PHI")==0))
+	if((strcmp((yyvsp[-2].symptr)->name, "PI")==0)||(strcmp((yyvsp[-2].symptr)->name,"PHI")==0)){
 	printf("assign to const\n");
-	else { (yyvsp[-2].symptr)->value = (yyvsp[0].dval); }}
+	}else { (yyvsp[-2].symptr)->value = (yyvsp[0].dval); }}
 #line 1220 "y.tab.c" /* yacc.c:1646  */
     break;
 
@@ -1514,27 +1514,29 @@ void print (){
 		count++;
 		temp = temp->next;
 	}
+	count++;
 	printf("num-syms: %d \n", count);
 	temp = sym_tbl;
 	while(temp->next != NULL){
 		printf("\t%s => %f \n", temp->name, temp->value);
 		temp = temp->next;
 	}
+	printf("\t%s => %f \n", temp->name, temp->value);
 }
 
 struct sym * sym_init (){
 	struct sym * pi = malloc(sizeof(*pi));
 	struct sym * phi = malloc(sizeof(*phi));
-	struct sym * head = phi;
 	phi = sym_new (NULL, "PHI", 1.61803);
 	pi = sym_new_loop (phi, "PI", 3.14159);
+	struct sym * head = phi;
 	return head;
 }
 
 struct sym * sym_new_loop (struct sym * sp, char * n, double val){
 	struct sym * newsp = malloc(sizeof(*newsp));
 	if (sp->next == NULL){
-		sp->next = sym_new(NULL, n, val);
+		sp->next = sym_new(sp->next, n, val);
 		return sp->next;
 	}else{
 	    if(n > sp->name){

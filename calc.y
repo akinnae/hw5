@@ -27,9 +27,9 @@ statement_list
 statement
     : LIST {print();}
     | NAME '=' expression { 
-	if((strcmp($1->name, "PI")==0)||(strcmp($1->name,"PHI")==0))
+	if((strcmp($1->name, "PI")==0)||(strcmp($1->name,"PHI")==0)){
 	printf("assign to const\n");
-	else { $1->value = $3; }}
+	}else { $1->value = $3; }}
     | expression { printf("= %g\n", $1); }
     ;
 
@@ -61,20 +61,22 @@ void print (){
 		count++;
 		temp = temp->next;
 	}
+	count++;
 	printf("num-syms: %d \n", count);
 	temp = sym_tbl;
 	while(temp->next != NULL){
 		printf("\t%s => %f \n", temp->name, temp->value);
 		temp = temp->next;
 	}
+	printf("\t%s => %f \n", temp->name, temp->value);
 }
 
 struct sym * sym_init (){
 	struct sym * pi = malloc(sizeof(*pi));
 	struct sym * phi = malloc(sizeof(*phi));
-	struct sym * head = phi;
 	phi = sym_new (NULL, "PHI", 1.61803);
 	pi = sym_new_loop (phi, "PI", 3.14159);
+	struct sym * head = phi;
 	return head;
 }
 
