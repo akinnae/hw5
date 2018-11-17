@@ -47,13 +47,15 @@ extern int yydebug;
   {
     NAME = 258,
     NUMBER = 259,
-    UMINUS = 260
+    LIST = 260,
+    UMINUS = 261
   };
 #endif
 /* Tokens.  */
 #define NAME 258
 #define NUMBER 259
-#define UMINUS 260
+#define LIST 260
+#define UMINUS 261
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -65,7 +67,7 @@ union YYSTYPE
     double dval;
     struct sym * symptr;
 
-#line 69 "y.tab.h" /* yacc.c:1909  */
+#line 71 "y.tab.h" /* yacc.c:1909  */
 };
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1

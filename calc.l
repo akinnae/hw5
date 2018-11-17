@@ -10,8 +10,9 @@
     return NUMBER;
     }
 
-[\?] {
+"?" {
     print();
+    return LIST;
 }
 
 [ \t] ; /* ignore whitespace */

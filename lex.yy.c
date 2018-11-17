@@ -738,16 +738,17 @@ YY_RULE_SETUP
 #line 13 "calc.l"
 {
     print();
+    return LIST;
 }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 17 "calc.l"
+#line 18 "calc.l"
 ; /* ignore whitespace */
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 19 "calc.l"
+#line 20 "calc.l"
 {
     /* return symbol pointer */
     yylval.symptr = sym_lookup(yytext);
@@ -756,24 +757,24 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 25 "calc.l"
+#line 26 "calc.l"
 { return 0; }
 	YY_BREAK
 case 6:
 /* rule 6 can match eol */
-#line 27 "calc.l"
+#line 28 "calc.l"
 case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
-#line 27 "calc.l"
+#line 28 "calc.l"
 { return yytext[0]; };
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 28 "calc.l"
+#line 29 "calc.l"
 ECHO;
 	YY_BREAK
-#line 777 "lex.yy.c"
+#line 778 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1771,7 +1772,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 28 "calc.l"
+#line 29 "calc.l"
 
 
 int yywrap() { return 1; }

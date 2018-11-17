@@ -12,6 +12,7 @@
 
 %token <symptr> NAME
 %token <dval> NUMBER
+%token <list> LIST
 %left '-' '+'
 %left '*' '/'
 %nonassoc UMINUS
@@ -24,7 +25,11 @@ statement_list
     ;
 
 statement
-    : NAME '=' expression { $1->value = $3; }
+    : LIST {print();}
+    | NAME '=' expression { 
+	if((strcmp($1->name, "PI")==0)||(strcmp($1->name,"PHI")==0))
+	printf("assign to const\n");
+	else { $1->value = $3; }}
     | expression { printf("= %g\n", $1); }
     ;
 
