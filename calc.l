@@ -10,6 +10,10 @@
     return NUMBER;
     }
 
+[\?] {
+    print();
+}
+
 [ \t] ; /* ignore whitespace */
 
 [A-Za-z][A-Za-z0-9]* {

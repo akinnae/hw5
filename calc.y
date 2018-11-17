@@ -45,7 +45,11 @@ expression
 
 int init=1;
 
-struct sym * print (){
+void print (){
+    if(init==1){
+	sym_tbl = sym_init();
+	init = 0;
+    }	
 	struct sym * temp = sym_tbl;
 	int count=0;
 	while(temp->next != NULL){
