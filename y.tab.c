@@ -420,8 +420,8 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    23,    23,    24,    28,    29,    33,    37,    38,    39,
-      40,    43,    44,    45,    46
+       0,    23,    23,    24,    28,    29,    30,    34,    35,    36,
+      37,    40,    41,    42,    43
 };
 #endif
 
@@ -1212,65 +1212,62 @@ yyreduce:
 
   case 5:
 #line 29 "calc.y" /* yacc.c:1646  */
-    { 
-	if((strcmp((yyvsp[-2].symptr)->name, "PI")==0)||(strcmp((yyvsp[-2].symptr)->name,"PHI")==0)){
-	printf("assign to const\n");
-	}else { (yyvsp[-2].symptr)->value = (yyvsp[0].dval); }}
-#line 1220 "y.tab.c" /* yacc.c:1646  */
+    { (yyvsp[-2].symptr)->value = (yyvsp[0].dval); }
+#line 1217 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 33 "calc.y" /* yacc.c:1646  */
+#line 30 "calc.y" /* yacc.c:1646  */
     { printf("= %g\n", (yyvsp[0].dval)); }
-#line 1226 "y.tab.c" /* yacc.c:1646  */
+#line 1223 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 37 "calc.y" /* yacc.c:1646  */
+#line 34 "calc.y" /* yacc.c:1646  */
     { (yyval.dval) = (yyvsp[-2].dval) + (yyvsp[0].dval); }
-#line 1232 "y.tab.c" /* yacc.c:1646  */
+#line 1229 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 38 "calc.y" /* yacc.c:1646  */
+#line 35 "calc.y" /* yacc.c:1646  */
     { (yyval.dval) = (yyvsp[-2].dval) - (yyvsp[0].dval); }
-#line 1238 "y.tab.c" /* yacc.c:1646  */
+#line 1235 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 39 "calc.y" /* yacc.c:1646  */
+#line 36 "calc.y" /* yacc.c:1646  */
     { (yyval.dval) = (yyvsp[-2].dval) * (yyvsp[0].dval); }
-#line 1244 "y.tab.c" /* yacc.c:1646  */
+#line 1241 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 40 "calc.y" /* yacc.c:1646  */
+#line 37 "calc.y" /* yacc.c:1646  */
     { 
 	if((yyvsp[0].dval) == 0){printf("divide by zero\n");}
 	else{(yyval.dval) = (yyvsp[-2].dval) / (yyvsp[0].dval);}}
-#line 1252 "y.tab.c" /* yacc.c:1646  */
+#line 1249 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 43 "calc.y" /* yacc.c:1646  */
+#line 40 "calc.y" /* yacc.c:1646  */
     { (yyval.dval) = -(yyvsp[0].dval); }
-#line 1258 "y.tab.c" /* yacc.c:1646  */
+#line 1255 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 44 "calc.y" /* yacc.c:1646  */
+#line 41 "calc.y" /* yacc.c:1646  */
     { (yyval.dval) = (yyvsp[-1].dval); }
-#line 1264 "y.tab.c" /* yacc.c:1646  */
+#line 1261 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 46 "calc.y" /* yacc.c:1646  */
+#line 43 "calc.y" /* yacc.c:1646  */
     { (yyval.dval) = (yyvsp[0].symptr)->value; }
-#line 1270 "y.tab.c" /* yacc.c:1646  */
+#line 1267 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1274 "y.tab.c" /* yacc.c:1646  */
+#line 1271 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1498,7 +1495,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 49 "calc.y" /* yacc.c:1906  */
+#line 46 "calc.y" /* yacc.c:1906  */
 
 
 int init=1;
@@ -1569,7 +1566,10 @@ struct sym * sym_lookup(char * s){
 //    for (sp=sym_tbl; sp < &sym_tbl[NSYMS]; sp++)
     {
         if (strcmp(sp->name, s) == 0){
-            a=0;
+            if ((strcmp(s, "PHI")==0)||(strcmp(s, "PI")==0)){
+		printf("assign to const\n");
+	    }
+	    a=0;
 	    return sp;
 	}
         if (sp->next != NULL){

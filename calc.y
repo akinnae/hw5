@@ -26,10 +26,7 @@ statement_list
 
 statement
     : LIST {print();}
-    | NAME '=' expression { 
-	if((strcmp($1->name, "PI")==0)||(strcmp($1->name,"PHI")==0)){
-	printf("assign to const\n");
-	}else { $1->value = $3; }}
+    | NAME '=' expression { $1->value = $3; }
     | expression { printf("= %g\n", $1); }
     ;
 
@@ -116,7 +113,10 @@ struct sym * sym_lookup(char * s){
 //    for (sp=sym_tbl; sp < &sym_tbl[NSYMS]; sp++)
     {
         if (strcmp(sp->name, s) == 0){
-            a=0;
+            if ((strcmp(s, "PHI")==0)||(strcmp(s, "PI")==0)){
+		printf("assign to const\n");
+	    }
+	    a=0;
 	    return sp;
 	}
         if (sp->next != NULL){
