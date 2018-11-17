@@ -9,7 +9,7 @@ yaccgens = y.tab.c y.tab.h
 prj = calc
 
 $(prj): $(lexgens) $(yaccgens)
-	$(cc) $(lexgens) $(yaccgens) $(ccopts) -o $(prj)
+	$(cc) -g $(lexgens) $(yaccgens) $(ccopts) -o $(prj)
 
 clean:
 	rm $(lexgens) $(yaccgens) $(prj)
